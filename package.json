@@ -8,13 +8,15 @@
   "scripts": {
     "playground": "pnpm --filter @monklabs/playground start",
     "typecheck": "pnpm -r --parallel typecheck",
+    "build": "pnpm --filter @monklabs/theme --filter @monklabs/ui run build",
+    "verify:packs": "pnpm build && node scripts/verify-packs.mjs",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "test": "pnpm -r test",
     "expo:check": "pnpm --filter @monklabs/playground run expo:check",
-    "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm expo:check"
+    "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm verify:packs && pnpm expo:check"
   },
   "devDependencies": {
     "@monklabs/eslint-config": "workspace:*",

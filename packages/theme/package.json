@@ -1,7 +1,12 @@
 {
   "name": "@monklabs/theme",
   "version": "0.1.0",
-  "private": true,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasanfurkanfidan/monklabs-mobile.git",
+    "directory": "packages/theme"
+  },
   "description": "Typed design tokens and product themes (MonkSets, MobilityLab) for MonkLabs apps.",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -11,12 +16,13 @@
   },
   "sideEffects": false,
   "scripts": {
+    "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "jest"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react": ">=19.0.0",
+    "react-native": ">=0.88.0"
   },
   "devDependencies": {
     "@react-native/jest-preset": "catalog:",
@@ -30,5 +36,20 @@
     "react-native": "catalog:",
     "test-renderer": "catalog:",
     "typescript": "catalog:"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "restricted",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
   }
 }

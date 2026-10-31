@@ -157,6 +157,11 @@ Policy:
 - ESLint stays on 9.x until `eslint-plugin-react` and `eslint-plugin-import` (used by `eslint-config-expo`) support 10.
 - GitHub Actions use the Node 24-based majors (`actions/checkout@v7`, `actions/setup-node@v7`, `pnpm/action-setup@v6`).
 
+## Distribution
+
+The shared packages are packed for consumption by separate app repositories. See [docs/RELEASING.md](docs/RELEASING.md)
+for the build, pack and publish flow and the open registry/scope blocker.
+
 ## Known limitations
 
 - The playground has only been verified via Jest, `expo export` and Metro serving the bundle. A native Android/iOS

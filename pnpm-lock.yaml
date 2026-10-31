@@ -343,11 +343,10 @@ importers:
         version: 6.0.3
 
   packages/ui:
-    dependencies:
+    devDependencies:
       '@monklabs/theme':
         specifier: workspace:*
         version: link:../theme
-    devDependencies:
       '@react-native/jest-preset':
         specifier: 'catalog:'
         version: 0.88.1(@babel/core@7.29.7(supports-color@8.1.1))(react@19.3.0)(supports-color@8.1.1)

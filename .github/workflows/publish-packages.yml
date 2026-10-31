@@ -1,0 +1,54 @@
+name: Publish packages
+
+# Manual only. Defaults to a dry run. Real publishing additionally requires that the npm scope
+# of the packages is owned by the account that owns this repository (see docs/RELEASING.md).
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Pack and validate only. Uncheck to really publish.
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    name: Verify, build and publish @monklabs/theme and @monklabs/ui
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: true
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: '@monklabs'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck, lint, format, test
+        run: pnpm typecheck && pnpm lint && pnpm format:check && pnpm test
+
+      - name: Build and verify packed packages
+        run: pnpm verify:packs
+
+      - name: Publish (dry run)
+        if: ${{ inputs.dry-run }}
+        run: pnpm --filter @monklabs/theme --filter @monklabs/ui publish --dry-run --no-git-checks
+
+      - name: Publish
+        if: ${{ !inputs.dry-run }}
+        run: pnpm --filter @monklabs/theme --filter @monklabs/ui publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -48,6 +48,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Build and verify packed packages
+        run: pnpm verify:packs
+
       - name: Expo dependency and config checks
         run: pnpm expo:check
 

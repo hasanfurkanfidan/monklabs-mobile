@@ -1,7 +1,12 @@
 {
   "name": "@monklabs/ui",
   "version": "0.1.0",
-  "private": true,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasanfurkanfidan/monklabs-mobile.git",
+    "directory": "packages/ui"
+  },
   "description": "Small, theme-aware React Native component library shared by MonkLabs apps.",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -11,18 +16,18 @@
   },
   "sideEffects": false,
   "scripts": {
+    "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "jest"
   },
-  "dependencies": {
-    "@monklabs/theme": "workspace:*"
-  },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
-    "react-native-safe-area-context": "*"
+    "react": ">=19.0.0",
+    "react-native": ">=0.88.0",
+    "react-native-safe-area-context": ">=5.0.0",
+    "@monklabs/theme": "workspace:^"
   },
   "devDependencies": {
+    "@monklabs/theme": "workspace:*",
     "@react-native/jest-preset": "catalog:",
     "@testing-library/react-native": "catalog:",
     "@types/jest": "catalog:",
@@ -35,5 +40,20 @@
     "react-native-safe-area-context": "catalog:",
     "test-renderer": "catalog:",
     "typescript": "catalog:"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "restricted",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
   }
 }
