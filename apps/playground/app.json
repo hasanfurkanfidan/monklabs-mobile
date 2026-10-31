@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "MonkLabs Playground",
+    "slug": "monklabs-playground",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "monklabs-playground",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#0E0F11",
+    "platforms": ["ios", "android"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.monklabs.playground"
+    },
+    "android": {
+      "package": "com.monklabs.playground",
+      "softwareKeyboardLayoutMode": "resize"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "reactCompiler": true
+    }
+  }
+}

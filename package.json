@@ -1,0 +1,25 @@
+{
+  "name": "monklabs-mobile",
+  "private": true,
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": "^24.3.0 || ^26.0.0"
+  },
+  "scripts": {
+    "playground": "pnpm --filter @monklabs/playground start",
+    "typecheck": "pnpm -r --parallel typecheck",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "test": "pnpm -r test",
+    "expo:check": "pnpm --filter @monklabs/playground run expo:check",
+    "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm expo:check"
+  },
+  "devDependencies": {
+    "@monklabs/eslint-config": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  }
+}
